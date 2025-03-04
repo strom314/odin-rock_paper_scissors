@@ -1,7 +1,12 @@
 console.log("cc");
 const choices = ["rock", "paper", "scissors"];
 let computerWins = 0;
-let playerWind = 0;
+let playerWins = 0;
+
+const computerChoiceText = document.querySelector("#computer-choice");
+const playerWinsText = document.querySelector("#player-wins");
+const computerWinsText = document.querySelector("#computer-wins");
+const tiesText = document.querySelector("#ties");
 
 function getComputerChoice() {
     return choices[randomIntFromInterval(0, 2)];
@@ -9,12 +14,10 @@ function getComputerChoice() {
 function randomIntFromInterval(min, max) { // min and max included 
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
-function getHumanChoice() {
-    let choice = Number(prompt("choose: rock(1) paper(2) scissors(3)"));
-    return choices[choice - 1];
 
-}
-function playRound(humanChoice, computerChoice) {
+function playRound(humanChoice) {
+    let computerChoice = getComputerChoice();
+
     if (humanChoice == computerChoice) {
         console.log(`both players chose ${humanChoice}, it's a draw`);
     }
@@ -24,11 +27,11 @@ function playRound(humanChoice, computerChoice) {
     }
     else if (humanChoice == "rock" && computerChoice == "scissors") {
         console.log("rocks beats scissors, player wins");
-        playerWind++;
+        playerWins++;
     }
     else if (humanChoice == "paper" && computerChoice == "rock") {
         console.log("paper beats rock, player wins");
-        playerWind++;
+        playerWins++;
     }
     else if (humanChoice == "paper" && computerChoice == "scissors") {
         console.log("scissors beat paper, computer wins");
@@ -40,14 +43,17 @@ function playRound(humanChoice, computerChoice) {
     }
     else if (humanChoice == "scissors" && computerChoice == "paper") {
         console.log("scissors beat paper, player wins");
-        playerWind++;
+        playerWins++;
     }
-}
-for (let i = 0; i < 5; i++) {
-    playRound(getHumanChoice(), getComputerChoice());
-    // console.log(`player wins: ${playerWind}`);
-    // console.log(`computer wins: ${computerWins}`);
-    // console.log(`round ${i + 1}`);
+
+
 }
 
-console.log(`game over \n player won ${playerWind} rounds \n computer won ${computerWins} rounds`);
+let choiceButtons = document.querySelectorAll(".choice-button");
+
+choiceButtons.forEach(button => {
+    button.addEventListener("click", playRound(button.textContent, getComputerChoice()));
+});
+
+
+console.log(`game over \n player won ${playerWins} rounds \n computer won ${computerWins} rounds`);
