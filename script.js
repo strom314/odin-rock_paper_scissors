@@ -4,10 +4,18 @@ let computerWins = 0;
 let playerWins = 0;
 let ties = 0;
 
+let roundsPlayed = 0;
+
 const computerChoiceText = document.querySelector("#computer-choice");
 const playerWinsText = document.querySelector("#player-wins");
 const computerWinsText = document.querySelector("#computer-wins");
 const tiesText = document.querySelector("#ties");
+
+const gameEndDiv = document.querySelector("#game-end");
+const resultsText = document.createElement("p");
+const restartButton = document.createElement("button");
+restartButton.textContent = "restart";
+restartButton.addEventListener("click", () => restartGame() );
 
 function getComputerChoice() {
     return choices[randomIntFromInterval(0, 2)];
@@ -16,48 +24,60 @@ function randomIntFromInterval(min, max) { // min and max included
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+function restartGame(){
+    gameEndDiv.removeChild(restartButton);
+    gameEndDiv.removeChild(resultsText);
+    roundsPlayed = 0;
+    computerWins = 0;
+    playerWins = 0;
+    ties = 0;
+    computerChoiceText.textContent = "computer chose: ";
+    playerWinsText.textContent = "player wins: ";
+    computerWinsText.textContent = "computer wins: ";
+    tiesText.textContent = "";
+}
+
 function playRound(humanChoice) {
+    if(roundsPlayed >=5){
+        resultsText.textContent = `game over \n player won ${playerWins} rounds \n computer won ${computerWins} rounds`;
+        gameEndDiv.appendChild(resultsText);
+        gameEndDiv.appendChild(restartButton);
+        return;
+    }
     let computerChoice = getComputerChoice();
+    computerChoiceText.textContent = "computer chose: " + computerChoice;
 
     if (humanChoice == computerChoice) {
-        console.log(`both players chose ${humanChoice}, it's a draw`);
         ties ++;
     }
     else if (humanChoice == "rock" && computerChoice == "paper") {
-        console.log("paper beats rock, computer wins");
         computerWins++;
     }
     else if (humanChoice == "rock" && computerChoice == "scissors") {
-        console.log("rocks beats scissors, player wins");
         playerWins++;
     }
     else if (humanChoice == "paper" && computerChoice == "rock") {
-        console.log("paper beats rock, player wins");
         playerWins++;
     }
     else if (humanChoice == "paper" && computerChoice == "scissors") {
-        console.log("scissors beat paper, computer wins");
         computerWins++;
     }
     else if (humanChoice == "scissors" && computerChoice == "rock") {
-        console.log("rock beats scissors, computer wins");
         computerWins++;
     }
     else if (humanChoice == "scissors" && computerChoice == "paper") {
-        console.log("scissors beat paper, player wins");
         playerWins++;
     }
 
-    playerWinsText.textContent = playerWins.toString();
-    computerWinsText.textContent = computerWins.toString();
-    tiesText.textContent = ties.toString();
+    playerWinsText.textContent = "player wins: " + playerWins.toString();
+    computerWinsText.textContent = "computer wins: " + computerWins.toString();
+    tiesText.textContent = "ties: " +  ties.toString();
+    roundsPlayed++;
 }
 
 let choiceButtons = document.querySelectorAll(".choice-button");
 
 choiceButtons.forEach(button => {
-    button.addEventListener("click", playRound(button.textContent));
+    button.addEventListener("click", () => playRound(button.textContent));
+    console.log("listener inicialized");
 });
-
-
-console.log(`game over \n player won ${playerWins} rounds \n computer won ${computerWins} rounds`);
