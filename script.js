@@ -34,12 +34,12 @@ function restartGame(){
     computerChoiceText.textContent = "computer chose: ";
     playerWinsText.textContent = "player wins: ";
     computerWinsText.textContent = "computer wins: ";
-    tiesText.textContent = "";
+    tiesText.textContent = "ties: ";
 }
 
 function playRound(humanChoice) {
     if(roundsPlayed >=5){
-        resultsText.textContent = `game over \n player won ${playerWins} rounds \n computer won ${computerWins} rounds`;
+        resultsText.textContent = `**game over** player won ${playerWins} rounds and computer won ${computerWins} rounds`;
         gameEndDiv.appendChild(resultsText);
         gameEndDiv.appendChild(restartButton);
         return;
