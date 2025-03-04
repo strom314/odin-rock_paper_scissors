@@ -2,6 +2,7 @@ console.log("cc");
 const choices = ["rock", "paper", "scissors"];
 let computerWins = 0;
 let playerWins = 0;
+let ties = 0;
 
 const computerChoiceText = document.querySelector("#computer-choice");
 const playerWinsText = document.querySelector("#player-wins");
@@ -20,6 +21,7 @@ function playRound(humanChoice) {
 
     if (humanChoice == computerChoice) {
         console.log(`both players chose ${humanChoice}, it's a draw`);
+        ties ++;
     }
     else if (humanChoice == "rock" && computerChoice == "paper") {
         console.log("paper beats rock, computer wins");
@@ -46,13 +48,15 @@ function playRound(humanChoice) {
         playerWins++;
     }
 
-
+    playerWinsText.textContent = playerWins.toString();
+    computerWinsText.textContent = computerWins.toString();
+    tiesText.textContent = ties.toString();
 }
 
 let choiceButtons = document.querySelectorAll(".choice-button");
 
 choiceButtons.forEach(button => {
-    button.addEventListener("click", playRound(button.textContent, getComputerChoice()));
+    button.addEventListener("click", playRound(button.textContent));
 });
 
 
