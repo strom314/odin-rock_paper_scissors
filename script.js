@@ -93,7 +93,7 @@ choiceButtons.forEach(button => {
 });
 
 function colorHumanButton(button){
-    button.style.backgroundColor = "blue";
+    button.style.backgroundColor = "#04838e";
         setTimeout(() => {
             button.style.backgroundColor = "lightBlue";
         }, 300);
@@ -101,7 +101,7 @@ function colorHumanButton(button){
 function colorComputerButton(computerChoice){
     computerButtons.forEach(button => {
         if(button.id == computerChoice){
-            button.style.backgroundColor = "blue";
+            button.style.backgroundColor = "#04838e";
             setTimeout(() => {
                 button.style.backgroundColor = "lightBlue";
             }, 300);
