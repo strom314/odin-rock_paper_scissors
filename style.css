@@ -2,6 +2,10 @@ body{
     display: flex;
     justify-content: center;
 }
+img{
+    width: auto;
+    height: 100px;
+}
 .game{
     display: flex;
     flex-direction: column;
@@ -13,4 +17,7 @@ body{
 .selection-container{
     display: flex;
     flex-direction: column;
+}
+.button-style{
+
 }
