@@ -12,12 +12,25 @@ img{
 }
 .buttons{
     display: flex;
-    
+    gap: 80px;
 }
 .selection-container{
     display: flex;
     flex-direction: column;
+    gap: 20px;
 }
 .button-style{
+    background-color: lightblue;
+    border: none;
+    border-radius: 8px;
 
+    padding: 10px;
+}
+.button-style:hover{
+    background-color: rgb(119, 180, 198);
+}
+
+
+.restart-button{
+    margin: 40px;
 }

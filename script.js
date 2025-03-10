@@ -10,6 +10,8 @@ let playerWins = 0;
 let ties = 0;
 let roundsPlayed = 0;
 
+let computerChoice = "";
+
 
 const playerWinsText = document.querySelector("#player-wins");
 const computerWinsText = document.querySelector("#computer-wins");
@@ -77,8 +79,32 @@ function determineWinner(humanChoice, computerChoice){
 }
 
 let choiceButtons = document.querySelectorAll(".choice-button");
+let computerButtons = document.querySelectorAll(".computer-button");
 
 choiceButtons.forEach(button => {
-    button.addEventListener("click", () => playRound(determineWinner(button.id, getComputerChoice())));
+    button.addEventListener("click", () => {
+        computerChoice = getComputerChoice();
+        playRound(determineWinner(button.id, computerChoice));
+        
+        colorHumanButton(button);
+        colorComputerButton(computerChoice);
+    });
     console.log("listener inicialized");
 });
+
+function colorHumanButton(button){
+    button.style.backgroundColor = "blue";
+        setTimeout(() => {
+            button.style.backgroundColor = "lightBlue";
+        }, 300);
+}
+function colorComputerButton(computerChoice){
+    computerButtons.forEach(button => {
+        if(button.id == computerChoice){
+            button.style.backgroundColor = "blue";
+            setTimeout(() => {
+                button.style.backgroundColor = "lightBlue";
+            }, 300);
+        }
+    });
+}
