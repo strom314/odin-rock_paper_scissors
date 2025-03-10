@@ -1,20 +1,23 @@
-console.log("cc");
 const choices = ["rock", "paper", "scissors"];
+const matches = {
+    rock: "scissors",
+    paper: "rock",
+    scissors: "paper"
+}
+
 let computerWins = 0;
 let playerWins = 0;
 let ties = 0;
-
 let roundsPlayed = 0;
 
-const computerChoiceText = document.querySelector("#computer-choice");
+
 const playerWinsText = document.querySelector("#player-wins");
 const computerWinsText = document.querySelector("#computer-wins");
 const tiesText = document.querySelector("#ties");
+const round = document.querySelector("#round");
 
-const gameEndDiv = document.querySelector("#game-end");
-const resultsText = document.createElement("p");
-const restartButton = document.createElement("button");
-restartButton.textContent = "restart";
+const restartButton = document.querySelector("#restart");
+const gameOver = document.querySelector("#game-over");
 restartButton.addEventListener("click", () => restartGame() );
 
 function getComputerChoice() {
@@ -25,59 +28,57 @@ function randomIntFromInterval(min, max) { // min and max included
 }
 
 function restartGame(){
-    gameEndDiv.removeChild(restartButton);
-    gameEndDiv.removeChild(resultsText);
     roundsPlayed = 0;
     computerWins = 0;
     playerWins = 0;
     ties = 0;
-    computerChoiceText.textContent = "computer chose: ";
-    playerWinsText.textContent = "player wins: ";
-    computerWinsText.textContent = "computer wins: ";
-    tiesText.textContent = "ties: ";
+    playerWinsText.textContent = "player wins: 0";
+    computerWinsText.textContent = "computer wins: 0";
+    tiesText.textContent = "ties: 0";
+    gameOver.textContent = "";
 }
 
-function playRound(humanChoice) {
-    if(roundsPlayed >=5){
-        resultsText.textContent = `**game over** player won ${playerWins} rounds and computer won ${computerWins} rounds`;
-        gameEndDiv.appendChild(resultsText);
-        gameEndDiv.appendChild(restartButton);
+
+
+function playRound(winner) {
+    if(roundsPlayed >= 5){
+        gameOver.textContent = "Game over!";
         return;
     }
-    let computerChoice = getComputerChoice();
-    computerChoiceText.textContent = "computer chose: " + computerChoice;
-
-    if (humanChoice == computerChoice) {
-        ties ++;
-    }
-    else if (humanChoice == "rock" && computerChoice == "paper") {
-        computerWins++;
-    }
-    else if (humanChoice == "rock" && computerChoice == "scissors") {
+    
+    if(winner == "human"){
         playerWins++;
     }
-    else if (humanChoice == "paper" && computerChoice == "rock") {
-        playerWins++;
-    }
-    else if (humanChoice == "paper" && computerChoice == "scissors") {
+    else if(winner == "computer"){
         computerWins++;
     }
-    else if (humanChoice == "scissors" && computerChoice == "rock") {
-        computerWins++;
-    }
-    else if (humanChoice == "scissors" && computerChoice == "paper") {
-        playerWins++;
+    else{
+        ties++;
     }
 
+    updateText();
+    roundsPlayed++;
+}
+
+function updateText(){
     playerWinsText.textContent = "player wins: " + playerWins.toString();
     computerWinsText.textContent = "computer wins: " + computerWins.toString();
     tiesText.textContent = "ties: " +  ties.toString();
-    roundsPlayed++;
+}
+
+function determineWinner(humanChoice, computerChoice){
+    if(humanChoice === computerChoice) return "tie";
+    if(matches[humanChoice] === computerChoice){
+        return "human";
+    }
+    else{
+        return "computer";
+    }
 }
 
 let choiceButtons = document.querySelectorAll(".choice-button");
 
 choiceButtons.forEach(button => {
-    button.addEventListener("click", () => playRound(button.textContent));
+    button.addEventListener("click", () => playRound(determineWinner(button.id, getComputerChoice())));
     console.log("listener inicialized");
 });

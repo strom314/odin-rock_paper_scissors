@@ -11,6 +11,7 @@
 <body>
     <div class="game">
         <div class="game-info">
+            <p id="round">round</p>
             <p id="player-wins">player wins: 0</p>
             <p id="computer-wins">computer wins: 0</p>
             <p id="ties">ties: 0</p>
@@ -18,9 +19,9 @@
         </div>
         <div class="buttons">
             <div class="selection-container">
-                <button class="choice-button button-style"><img src="./img/rock2.png" alt=""></button>
-                <button class="choice-button button-style"><img src="./img/paper.png" alt=""></button>
-                <button class="choice-button button-style"><img src="./img/scissors.png" alt=""></button>
+                <button id="rock" class="choice-button button-style"><img src="./img/rock2.png" alt=""></button>
+                <button id="paper" class="choice-button button-style"><img src="./img/paper.png" alt=""></button>
+                <button id="scissors" class="choice-button button-style"><img src="./img/scissors.png" alt=""></button>
             </div>
             <div class="selection-container">
                 <button class="button-style"><img src="./img/rock2.png" alt=""></button>
@@ -28,9 +29,10 @@
                 <button class="button-style"><img src="./img/scissors.png" alt=""></button>
             </div>
         </div>
+        <button id="restart" class="restart-button">restart</button>
+        <p id="game-over"></p>
     </div>
 
-    <div id="game-end"></div>
     <script src="./script.js"></script>
 </body>
 </html>
