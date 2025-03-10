@@ -2,3 +2,15 @@ body{
     display: flex;
     justify-content: center;
 }
+.game{
+    display: flex;
+    flex-direction: column;
+}
+.buttons{
+    display: flex;
+    
+}
+.selection-container{
+    display: flex;
+    flex-direction: column;
+}

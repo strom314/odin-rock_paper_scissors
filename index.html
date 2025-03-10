@@ -10,18 +10,25 @@
 </head>
 <body>
     <div class="game">
-    <div class="selection-container">
-        <button class="choice-button">rock</button>
-        <button class="choice-button">paper</button>
-        <button class="choice-button">scissors</button>
-    </div>
         <div class="game-info">
             <p id="player-wins">player wins: 0</p>
             <p id="computer-wins">computer wins: 0</p>
             <p id="ties">ties: 0</p>
+            <!-- <p id="computer-choice">computer chose: </p> -->
+        </div>
+        <div class="buttons">
+            <div class="selection-container">
+                <button class="choice-button">rock <img src="" alt=""></button>
+                <button class="choice-button">paper</button>
+                <button class="choice-button">scissors</button>
+            </div>
+            <div class="selection-container">
+                <button class="button-style">rock</button>
+                <button class="button-style">paper</button>
+                <button class="button-style">scissors</button>
+            </div>
         </div>
     </div>
-    <p id="computer-choice">computer chose: </p>
 
     <div id="game-end"></div>
     <script src="./script.js"></script>
