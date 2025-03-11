@@ -21,6 +21,7 @@ const tiesText = document.querySelector("#ties");
 
 const restartButton = document.querySelector("#restart");
 const gameOver = document.querySelector("#game-over");
+
 restartButton.addEventListener("click", () => restartGame() );
 
 function getComputerChoice() {
