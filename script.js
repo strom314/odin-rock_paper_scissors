@@ -12,11 +12,12 @@ let roundsPlayed = 0;
 
 let computerChoice = "";
 
+let hasEnded = false;
+
 
 const playerWinsText = document.querySelector("#player-wins");
 const computerWinsText = document.querySelector("#computer-wins");
 const tiesText = document.querySelector("#ties");
-const round = document.querySelector("#round");
 
 const restartButton = document.querySelector("#restart");
 const gameOver = document.querySelector("#game-over");
@@ -38,13 +39,14 @@ function restartGame(){
     computerWinsText.textContent = "computer wins: 0";
     tiesText.textContent = "ties: 0";
     gameOver.textContent = "";
+    hasEnded = false;
 }
 
 
 
 function playRound(winner) {
     if(roundsPlayed >= 5){
-        gameOver.textContent = "Game over!";
+        hasEnded = true;
         return;
     }
     
@@ -57,9 +59,28 @@ function playRound(winner) {
     else{
         ties++;
     }
+    
 
     updateText();
     roundsPlayed++;
+
+    //game end
+    if(roundsPlayed === 5){
+        gameOver.textContent = "Game over!";
+        showResults();
+    }
+}
+
+function showResults(){
+    if(playerWins > computerWins){
+        alert("You won!");
+    }
+    else if(computerWins > playerWins){
+        alert("You lost!");
+    }
+    else{
+        alert("It's a draw!");
+    }
 }
 
 function updateText(){
@@ -86,8 +107,12 @@ choiceButtons.forEach(button => {
         computerChoice = getComputerChoice();
         playRound(determineWinner(button.id, computerChoice));
         
-        colorHumanButton(button);
-        colorComputerButton(computerChoice);
+        if(!hasEnded)
+        {
+            colorHumanButton(button);
+            colorComputerButton(computerChoice);
+        }
+        
     });
     console.log("listener inicialized");
 });
